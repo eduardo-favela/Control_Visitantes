@@ -30,17 +30,17 @@
         <div class="row">
             <div class="col-md-3 espaciador">
                 <br>
-                <input type="text" class="form-control" name="placa" placeholder="N° de Placa">
+                <input type="text" class="form-control" name="placa" id="plca" placeholder="N° de Placa">
                 <br>
-                <input type="text" class="form-control" name="apellido_visitante" placeholder="Apellido del visitante">
+                <input type="text" class="form-control" name="apellido_visitante" id="apellido" placeholder="Apellido del visitante">
                 <br>
-                <input type="text" class="form-control" name="marca_auto" placeholder="Marca de auto">
+                <input type="text" class="form-control" name="marca_auto" id="marca" placeholder="Marca de auto">
             </div>
             <div class="col-md-3 form-group">
                 <br>
-                <input type="text" class="form-control" name="nombre_visitante" placeholder="Nombre del visitante">
+                <input type="text" class="form-control" name="nombre_visitante" id="nombre" placeholder="Nombre del visitante">
                 <br>
-                <input type="text" class="form-control" name="color_auto"  placeholder="Color de auto">
+                <input type="text" class="form-control" name="color_auto" id="color"  placeholder="Color de auto">
             </div>
             <div class="col-md-4 offset-1 form-group">
                 <br>
@@ -103,4 +103,68 @@
     {{--</div>--}}
 @endsection
 @section('javascript')
+    <script>
+        $(document).ready(function() {
+            var options = {
+                url: "placas",
+
+                getValue: "placa",
+
+                list: {
+                    showAnimation: {
+                        type: "fade", //normal|slide|fade
+                        time: 400,
+                        callback: function () {
+                        }
+                    },
+                    hideAnimation: {
+                        type: "slide", //normal|slide|fade
+                        time: 400,
+                        callback: function () {
+                        }
+                    },
+                    onChooseEvent: function () {
+                        var token = $("input[name=_token]").val();
+                        $.ajax({
+                            url: "placasfiltradas",
+                            // en data se envían los datos
+                            data: {placa: $("input[name=placa]").val(), _token: token},
+                            type: "post",
+                            dataType: 'json',
+                            success: function (response) {
+                                // alert("sss");
+                                // console.log(response);
+                                // var cont = "";
+                                // var nombres = $("#disenos");
+                                // nombres.empty();
+                                // $.each(response, function (i, r) {
+                                //     cont += '<tr><td>' + r.id_diseno + '</td><td>' + r.categoria + '</td><td>' + r.nombre + '</td><td><div style="height: 100px; width: 100px"><img style="width: 100px;height: 100px" src="storage/disenos/' + r.diseno + '"></div></td></tr>'
+                                // });
+                                // nombres.append(cont);
+                                var nombre=$("#nombre");
+                                var marca=$("#marca");
+                                var color=$("#color");
+                                var apellido=$("#apellido");
+                                // nombres=response.nombre;
+                                // console.log(response);
+                                $.each(response,function(i,response){
+                                    nombre.val(response.nombre);
+                                    marca.val(response.marca_auto);
+                                    color.val(response.color_auto);
+                                    apellido.val(response.apellido);
+                                });
+
+                            }
+                        })
+                    },
+
+                    match: {
+                        enabled: true
+                    }
+                },
+                // theme:"round"
+            };
+            $("#plca").easyAutocomplete(options);
+        });
+    </script>
     @endsection

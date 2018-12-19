@@ -3,6 +3,8 @@
 <head>
     <title>Control Visitantes</title>
     <link rel="stylesheet" type="text/css" href={{url(("/css/bootstrap.css"))}}>
+    <link rel="stylesheet" type="text/css" href={{url(("/css/easy-autocomplete.css"))}}>
+    <link rel="stylesheet" type="text/css" href={{url(("/css/easy-autocomplete.themes.css"))}}>
 
     @yield('cssextra')
     <style>
@@ -48,10 +50,12 @@
 @section('Contenido')
 
 @show
-@yield('javascript')
-<script src="{{url('/js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{url('/js/jquery-3.3.1.js')}}"></script>
 <script src="{{url('/js/Popper.js')}}"></script>
 <script src="{{url('/js/bootstrap.js')}}"></script>
+<script src="{{url('/js/jquery.easy-autocomplete.js')}}"></script>
+@yield('javascript')
+
 </body>
 </html>
 

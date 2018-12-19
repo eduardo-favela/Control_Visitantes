@@ -12,6 +12,8 @@
 
 Route::get('/','RutasController@iniciosesion');
 Route::get('/inicio','OperacionesBDController@getvisitantes');
+Route::get('/placas','OperacionesBDController@getplacas');
+Route::post('/placasfiltradas','OperacionesBDController@getplacasfiltradas');
 Route::get('/registrarcolono','OperacionesBDController@getcolonos');
 Route::get('/visitas','OperacionesBDController@getvisitas');
 Route::post('/registrarcolonos','OperacionesBDController@setcolonos');

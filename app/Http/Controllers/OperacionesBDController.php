@@ -16,9 +16,24 @@ class OperacionesBDController extends Controller
         dd($horaActual);
     }
     function getvisitantes(){
-    $visitante=DB::table('visitantes')->select(DB::raw("placa, concat(nombre,' ',apellido) as 'nombre', color_auto, marca_auto"))->get();
+    $visitante=DB::table('visitantes')
+        ->select(DB::raw("placa, concat(nombre,' ',apellido) as 'nombre', color_auto, marca_auto"))
+        ->get();
 //        dd($visitante);
     return view('inicio',compact('visitante'));
+}
+function getplacas(){
+    $visitante=DB::table('visitantes')
+        ->select(DB::raw("placa, concat(nombre,' ',apellido) as 'nombre', color_auto, marca_auto"))
+        ->get();
+    return $visitante;
+}
+function getplacasfiltradas(Request $request){
+//        dd($request->placa);
+        $placa=$request->get('placa');
+        $visitante=Visitante::all()->where('placa','=',$placa);
+//        dd($visitante);
+        return $visitante;
 }
     function setvisitantes(Request $request){
         $visitante=new Visitante();
