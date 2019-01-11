@@ -30,11 +30,27 @@
         <div class="row">
             <div class="col-md-3 espaciador">
                 <br>
+
                 <input type="text" class="form-control" name="placa" id="plca" placeholder="N° de Placa">
                 <br>
                 <input type="text" class="form-control" name="apellido_visitante" id="apellido" placeholder="Apellido del visitante">
                 <br>
-                <input type="text" class="form-control" name="marca_auto" id="marca" placeholder="Marca de auto">
+                <select name="myselect" id="marca" class="form-control">
+                    <option value="0">Select car:</option>
+                    <option value="1">Audi</option>
+                    <option value="2" class="imagebacked" style="background-image: url(/car_brands/bmw.png);">BMW</option>
+                    <option value="3">Citroen</option>
+                    <option value="4">Ford</option>
+                    <option value="5">Honda</option>
+                    <option value="6">Jaguar</option>
+                    <option value="7">Land Rover</option>
+                    <option value="8">Mercedes</option>
+                    <option value="9">Mini</option>
+                    <option value="10">Nissan</option>
+                    <option value="11">Toyota</option>
+                    <option value="12">Volvo</option>
+                </select>
+                {{--<input type="text" class="form-control" name="marca_auto" id="marca" placeholder="Marca de auto">--}}
             </div>
             <div class="col-md-3 form-group">
                 <br>
@@ -49,7 +65,12 @@
                 <h5 style="text-align:center; color: #3d4852;"></h5>
             </div>
             <div class="col-md-4 offset-4">
-                <br><br><br>
+                <br>
+                @if(Session::has('flash_message'))
+                    <div class="alert alert-danger" role="alert">
+                        <p>{{Session::get('flash_message')}}</p>
+                    </div>
+                @endif
                 <button class="btn btn-primary form-control" type="submit">Registrar</button>
             </div>
         </div>
@@ -147,17 +168,13 @@
                                 var apellido=$("#apellido");
                                 // nombres=response.nombre;
                                 // console.log(response);
-                                $.each(response,function(i,response){
                                     nombre.val(response.nombre);
                                     marca.val(response.marca_auto);
                                     color.val(response.color_auto);
                                     apellido.val(response.apellido);
-                                });
-
                             }
                         })
                     },
-
                     match: {
                         enabled: true
                     }

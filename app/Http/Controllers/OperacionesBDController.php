@@ -9,6 +9,8 @@ use App\Visitante;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
+
 class OperacionesBDController extends Controller
 {
     function verhora(){
@@ -30,8 +32,8 @@ function getplacas(){
 }
 function getplacasfiltradas(Request $request){
 //        dd($request->placa);
-        $placa=$request->get('placa');
-        $visitante=Visitante::all()->where('placa','=',$placa);
+         $placa=$request->get('placa');
+        $visitante=Visitante::where('placa','=',$placa)->first();
 //        dd($visitante);
         return $visitante;
 }
@@ -69,11 +71,17 @@ function getplacasfiltradas(Request $request){
         return view('visitas',compact('visita'));
     }
     function setvisitas(Request $request){
-        $visita=new Visita();
-        $visita->fecha_hora=Carbon::now("America/Mexico_City")->toDateTimeString();
-        $visita->id_colono=$request->input('nombre_colono');
-        $visita->id_visitante=$request->input('placa');
-        $visita->save();
-        return back();
+        if ($request->input('nombre_colono')==null||$request->input('placa')==null){
+            Session::flash('flash_message','Datos incompletos, se deben llenar los campos nuevamente');
+            return back();
+        }
+        else {
+            $visita=new Visita();
+            $visita->fecha_hora=Carbon::now("America/Mexico_City")->toDateTimeString();
+            $visita->id_colono=$request->input('nombre_colono');
+            $visita->id_visitante=$request->input('placa');
+            $visita->save();
+            return back();
+        }
     }
 }
