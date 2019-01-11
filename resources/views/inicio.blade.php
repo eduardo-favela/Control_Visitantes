@@ -35,20 +35,22 @@
                 <br>
                 <input type="text" class="form-control" name="apellido_visitante" id="apellido" placeholder="Apellido del visitante">
                 <br>
-                <select name="myselect" id="marca" class="form-control">
-                    <option value="0">Select car:</option>
-                    <option value="1">Audi</option>
-                    <option value="2" class="imagebacked" style="background-image: url(/car_brands/bmw.png);">BMW</option>
-                    <option value="3">Citroen</option>
-                    <option value="4">Ford</option>
-                    <option value="5">Honda</option>
-                    <option value="6">Jaguar</option>
-                    <option value="7">Land Rover</option>
-                    <option value="8">Mercedes</option>
-                    <option value="9">Mini</option>
-                    <option value="10">Nissan</option>
-                    <option value="11">Toyota</option>
-                    <option value="12">Volvo</option>
+                <select name="marca_auto" id="marca" class="form-control">
+                    <option value="0">Seleccionar automóvil:</option>
+                    <option value="Audi">Audi</option>
+                    <option value="BMW">BMW</option>
+                    <option value="Ford">Ford</option>
+                    <option value="Honda">Honda</option>
+                    <option value="Jaguar">Jaguar</option>
+                    <option value="Land Rover">Land Rover</option>
+                    <option value="Mercedes">Mercedes</option>
+                    <option value="Mini">Mini</option>
+                    <option value="Nissan">Nissan</option>
+                    <option value="Toyota">Toyota</option>
+                    <option value="Volvo">Volvo</option>
+                    <option value="Dodge">Dodge</option>
+                    <option value="Volkswagen">Volkswagen</option>
+                    <option value="Ferrari">Ferrari</option>
                 </select>
                 {{--<input type="text" class="form-control" name="marca_auto" id="marca" placeholder="Marca de auto">--}}
             </div>
@@ -62,7 +64,11 @@
                 <br>
                 <input type="text" class="form-control" name="nombre_colono" placeholder="Nombre del colono">
                 <br>
-                <h5 style="text-align:center; color: #3d4852;"></h5>
+                <input type="text" class="form-control" name="calle_colono" placeholder="Calle">
+                <br>
+                <input type="text" class="form-control" name="nocasa" placeholder="Número de casa">
+                <br>
+                <h3>{{$ultimavisita}}</h3>
             </div>
             <div class="col-md-4 offset-4">
                 <br>
@@ -148,32 +154,23 @@
                         var token = $("input[name=_token]").val();
                         $.ajax({
                             url: "placasfiltradas",
-                            // en data se envían los datos
                             data: {placa: $("input[name=placa]").val(), _token: token},
                             type: "post",
                             dataType: 'json',
                             success: function (response) {
-                                // alert("sss");
-                                // console.log(response);
-                                // var cont = "";
-                                // var nombres = $("#disenos");
-                                // nombres.empty();
-                                // $.each(response, function (i, r) {
-                                //     cont += '<tr><td>' + r.id_diseno + '</td><td>' + r.categoria + '</td><td>' + r.nombre + '</td><td><div style="height: 100px; width: 100px"><img style="width: 100px;height: 100px" src="storage/disenos/' + r.diseno + '"></div></td></tr>'
-                                // });
-                                // nombres.append(cont);
                                 var nombre=$("#nombre");
                                 var marca=$("#marca");
                                 var color=$("#color");
                                 var apellido=$("#apellido");
-                                // nombres=response.nombre;
-                                // console.log(response);
                                     nombre.val(response.nombre);
                                     marca.val(response.marca_auto);
                                     color.val(response.color_auto);
                                     apellido.val(response.apellido);
                             }
-                        })
+                        });
+
+                        //Poner otro ajax para consultar a la última persona que visitó algún hijo de perra y hacer método que contenga esa consulta
+
                     },
                     match: {
                         enabled: true

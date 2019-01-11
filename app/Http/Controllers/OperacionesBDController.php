@@ -31,10 +31,8 @@ function getplacas(){
     return $visitante;
 }
 function getplacasfiltradas(Request $request){
-//        dd($request->placa);
          $placa=$request->get('placa');
         $visitante=Visitante::where('placa','=',$placa)->first();
-//        dd($visitante);
         return $visitante;
 }
     function setvisitantes(Request $request){
@@ -71,17 +69,34 @@ function getplacasfiltradas(Request $request){
         return view('visitas',compact('visita'));
     }
     function setvisitas(Request $request){
+        $placa=$request->get('placa');
+        $visitante=Visitante::where('placa','=',$placa)->first();
+        if ($visitante==null){
+            $nuevovis=new Visitante();
+            $nuevovis->placa=$request->input('placa');
+            $nuevovis->nombre=$request->input('nombre_visitante');
+            $nuevovis->apellido=$request->input('apellido_visitante');
+            $nuevovis->color_auto=$request->input('color_auto');
+            $nuevovis->marca_auto=$request->input('marca_auto');
+            $nuevovis->save();
+            return $this->setvisitas2($request);
+        }
+        else {
+            return $this->setvisitas2($request);
+        }
+    }
+    function setvisitas2($request){
         if ($request->input('nombre_colono')==null||$request->input('placa')==null){
             Session::flash('flash_message','Datos incompletos, se deben llenar los campos nuevamente');
             return back();
         }
         else {
-            $visita=new Visita();
-            $visita->fecha_hora=Carbon::now("America/Mexico_City")->toDateTimeString();
-            $visita->id_colono=$request->input('nombre_colono');
-            $visita->id_visitante=$request->input('placa');
-            $visita->save();
-            return back();
+                $visita=new Visita();
+                $visita->fecha_hora=Carbon::now("America/Mexico_City")->toDateTimeString();
+                $visita->id_colono=$request->input('nombre_colono');
+                $visita->id_visitante=$request->input('placa');
+                $visita->save();
+                return back();
         }
     }
 }
