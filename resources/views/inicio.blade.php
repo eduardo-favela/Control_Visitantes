@@ -41,6 +41,7 @@
                     <option value="BMW">BMW</option>
                     <option value="Ford">Ford</option>
                     <option value="Honda">Honda</option>
+                    <option value="Mazda">Mazda</option>
                     <option value="Jaguar">Jaguar</option>
                     <option value="Land Rover">Land Rover</option>
                     <option value="Mercedes">Mercedes</option>
@@ -62,13 +63,13 @@
             </div>
             <div class="col-md-4 offset-1 form-group">
                 <br>
-                <input type="text" class="form-control" name="nombre_colono" placeholder="Nombre del colono">
+                <input type="text" class="form-control" name="nombre_colono" id="nombre_colono" placeholder="Nombre del colono">
                 <br>
-                <input type="text" class="form-control" name="calle_colono" placeholder="Calle">
+                <input type="text" class="form-control" name="calle_colono" id="calle_colono" placeholder="Calle">
                 <br>
-                <input type="text" class="form-control" name="nocasa" placeholder="Número de casa">
+                <input type="text" class="form-control" name="nocasa" id="nocasa" placeholder="Número de casa">
                 <br>
-                <h3>{{$ultimavisita}}</h3>
+                {{--<h3>{{$ultimavisita}}</h3>--}}
             </div>
             <div class="col-md-4 offset-4">
                 <br>
@@ -81,53 +82,6 @@
             </div>
         </div>
     </form>
-    {{--<div class="row">--}}
-    {{--<div class="col-md-6">--}}
-    {{--<table class="table">--}}
-    {{--<thead>--}}
-                {{--<tr>--}}
-                    {{--<th style="color: #3d4852;">Número de placa</th>--}}
-                    {{--<th style="color: #3d4852;">Nombre</th>--}}
-                    {{--<th style="color: #3d4852;">Color de automóvil</th>--}}
-                    {{--<th style="color: #3d4852;">Marca de automóvil</th>--}}
-                {{--</tr>--}}
-                {{--</thead>--}}
-                {{--<tbody>--}}
-                {{--<br><br>--}}
-                {{--@foreach ($visitante as $item)--}}
-                    {{--<tr>--}}
-                        {{--<td>{{$item->placa}}</td>--}}
-                        {{--<td>{{$item->nombre}}</td>--}}
-                        {{--<td>{{$item->color_auto}}</td>--}}
-                        {{--<td>{{$item->marca_auto}}</td>--}}
-                    {{--</tr>--}}
-                {{--@endforeach--}}
-                {{--</tbody>--}}
-            {{--</table>--}}
-        {{--</div>--}}
-        {{--<div class="col-md-4 offset-1">--}}
-            {{--<br>--}}
-            {{--<h1 style="text-align: center; color: #3d4852;">Registrar visitante</h1>--}}
-            {{--<form action="registrarvisitantes" method="post">--}}
-                {{--{{csrf_field()}}--}}
-                {{--<br>--}}
-                {{--<input type="text" name="placa" class="form-control" placeholder="N° Placa">--}}
-                {{--<br>--}}
-                {{--<input type="text" name="nombre" class="form-control" placeholder="Nombre">--}}
-                {{--<br>--}}
-                {{--<input type="text" name="apellido" class="form-control" placeholder="Apellido">--}}
-                {{--<br>--}}
-                {{--<input type="text" name="color" class="form-control" placeholder="Color de automóvil">--}}
-                {{--<br>--}}
-                {{--<input type="text" name="marca" class="form-control" placeholder="Marca de automóvil">--}}
-                {{--<br>--}}
-                {{--<div align=center>--}}
-                    {{--<button type="submit" class="btn btn-primary form-control" style="width:150px">Registrar</button>--}}
-                {{--</div>--}}
-                {{--<br><br>--}}
-            {{--</form>--}}
-        {{--</div>--}}
-    {{--</div>--}}
 @endsection
 @section('javascript')
     <script>
@@ -171,6 +125,20 @@
 
                         //Poner otro ajax para consultar a la última persona que visitó algún hijo de perra y hacer método que contenga esa consulta
 
+                        $.ajax({
+                            url: "ultimovisitado",
+                            data: {placa: $("input[name=placa]").val(), _token: token},
+                            type: "post",
+                            dataType: 'json',
+                            success: function (response) {
+                                var nombre=$("#nombre_colono");
+                                var calle=$("#calle_colono");
+                                var nocasa=$("#nocasa");
+                                nombre.val(response[0].nombre);
+                                calle.val(response[0].calle);
+                                nocasa.val(response[0].nocasa);
+                            }
+                        });
                     },
                     match: {
                         enabled: true

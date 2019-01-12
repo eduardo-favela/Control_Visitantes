@@ -87,6 +87,8 @@ ALTER TABLE `control`.`visitantes`
 DROP COLUMN `apellido_m`,
 CHANGE COLUMN `apellido_p` `apellido` VARCHAR(45) NULL DEFAULT NULL ;
 
+ALTER TABLE `control`.`usuarios` 
+ADD COLUMN `tipo` INT NULL AFTER `pass`;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

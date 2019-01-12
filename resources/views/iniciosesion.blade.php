@@ -30,10 +30,17 @@
     <div class="col-md-4 col-sm-4 offset-4 form-control">
         <h2 class="iniciosesion" style="color: #3d4852;">Inicie sesión</h2>
         <br>
-        <form action="" method="post">
+        <form action="iniciarsesion" method="post">
+            {{csrf_field()}}
             <input class="form-control" type="text" placeholder="Usuario" name="usuario">
         <br>
         <input class="form-control" type="password" placeholder="Contraseña" name="password">
+            <br>
+            @if(Session::has('flash_message'))
+                <div class="alert alert-danger" role="alert">
+                    <p>{{Session::get('flash_message')}}</p>
+                </div>
+            @endif
         <br>
         <button class="btn btn-primary form-control" type="submit">Ingresar</button>
         <br>

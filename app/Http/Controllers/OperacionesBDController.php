@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Usuario;
 use App\Visita;
 use Illuminate\Http\Request;
 use App\Colono;
@@ -22,7 +23,10 @@ class OperacionesBDController extends Controller
         ->select(DB::raw("placa, concat(nombre,' ',apellido) as 'nombre', color_auto, marca_auto"))
         ->get();
 //        dd($visitante);
-    return view('inicio',compact('visitante'));
+    return view('registrarvisitantes',compact('visitante'));
+}
+function inicio(){
+        return view('inicio');
 }
 function getplacas(){
     $visitante=DB::table('visitantes')
@@ -98,5 +102,31 @@ function getplacasfiltradas(Request $request){
                 $visita->save();
                 return back();
         }
+    }
+    function iniciarsesion(Request $request){
+        $usuario=$request->get('usuario');
+        $password=$request->get('password');
+        $cons=Usuario::where('idusuario','=',$usuario)->where('pass','=',$password)->first();
+//        dd($cons);
+        if($cons!=null){
+            Session::put('tipo',$cons->tipo);
+            return redirect('/inicio');
+        }
+        else {
+            Session::flash('flash_message','Usuario o contraseña incorrectos, intente nuevamente.');
+            return back();
+        }
+    }
+    function ultimovisitado(Request $request){
+        $visitante=$request->get('placa');
+        $ultimo=DB::table('visitas')->join('colonos','colonos.idcolono','=','visitas.id_colono','inner')
+            ->join('visitantes','visitantes.placa','=','visitas.id_visitante')
+            ->select(DB::raw('concat(colonos.nombre," ",colonos.apellido) as nombre, colonos.calle as "calle", colonos.numero_casa as "nocasa"'))
+            ->where('visitas.id_visitante','=',$visitante)
+            ->orderBy('visitas.idvisita','desc')
+            ->limit(1)
+            ->get();
+//        dd($ultimo);
+        return $ultimo;
     }
 }

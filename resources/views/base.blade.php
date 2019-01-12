@@ -27,23 +27,25 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <div style="margin-left: 500px">
+                <div style="margin-left: 500px;">
                     <h1>Control</h1>
                 </div>
             </li>
-            <li class="nav-item dropdown" style=" margin-left: 310px">
+            <li class="nav-item dropdown" style=" margin-left: 400px">
                 <a class="nav-link dropdown-toggle titulos" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #FFFFFF; font-size: 25px;">
                     Menú
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href={{url('registrarcolono')}}>Colonos</a>
+                    @if(Session::get('tipo')==1)
+
+                    <a class="dropdown-item" href={{url('registrarcolono')}}>Colonos</a>
+                    <a class="dropdown-item" href={{url('visitantes')}}>Visitantes</a>
                         <a class="dropdown-item" href={{url('visitas')}}>Visitas</a>
                         <a class="dropdown-item" href="#">Usuarios</a>
+                    @endif
+                    <a class="nav-link btn btn-danger" href="#" style="color: #ffffff; font-size: 20px">Cerrar Sesión</a>
                 </div>
             </li>
-            {{--<li class="nav-item" style="margin-left: 40px">--}}
-                    {{--<a class="nav-link btn btn-danger" href="#" style="color: #ffffff; font-size: 20px">Cerrar Sesión</a>--}}
-            {{--</li>--}}
         </ul>
     </div>
 </nav>
