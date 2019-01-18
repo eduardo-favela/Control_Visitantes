@@ -75,7 +75,10 @@ function getplacasfiltradas(Request $request){
     function setvisitas(Request $request){
         $placa=$request->get('placa');
         $visitante=Visitante::where('placa','=',$placa)->first();
-        if ($visitante==null){
+         if ($request->input('placa')==null){
+             return $this->setvisitas2($request);
+        }
+        else if ($visitante==null){
             $nuevovis=new Visitante();
             $nuevovis->placa=$request->input('placa');
             $nuevovis->nombre=$request->input('nombre_visitante');
@@ -90,8 +93,8 @@ function getplacasfiltradas(Request $request){
         }
     }
     function setvisitas2($request){
-        if ($request->input('nombre_colono')==null||$request->input('placa')==null){
-            Session::flash('flash_message','Datos incompletos, se deben llenar los campos nuevamente');
+        if ($request->input('nombre_colono')==null||$request->input('nombre_colono')==null||$request->input('nombre_visitante')==null){
+            Session::flash('flash_message','Datos incompletos, se deben llenar los campos nuevamente.');
             return back();
         }
         else {
