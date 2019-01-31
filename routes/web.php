@@ -23,3 +23,5 @@ Route::get('/verhora','OperacionesBDController@verhora');
 Route::post('/registrarvisitas','OperacionesBDController@setvisitas');
 Route::post('/iniciarsesion','OperacionesBDController@iniciarsesion');
 Route::post('/ultimovisitado','OperacionesBDController@ultimovisitado');
+Route::get('/colonos','OperacionesBDController@getcolono');
+Route::post('/colonosfiltrados','OperacionesBDController@getcolonosfiltrados');

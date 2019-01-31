@@ -90,6 +90,8 @@ CHANGE COLUMN `apellido_p` `apellido` VARCHAR(45) NULL DEFAULT NULL ;
 ALTER TABLE `control`.`usuarios` 
 ADD COLUMN `tipo` INT NULL AFTER `pass`;
 
+INSERT INTO `control`.`usuarios` (`idusuario`, `pass`, `tipo`) VALUES ('3554', '1010', '2');
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

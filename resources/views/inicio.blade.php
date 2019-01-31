@@ -65,6 +65,8 @@
                 <br>
                 <input type="text" class="form-control" name="nombre_colono" id="nombre_colono" placeholder="Nombre del colono">
                 <br>
+                <input type="text" class="form-control" name="apellido_colono" id="apellido_colono" placeholder="Apellido del colono">
+                <br>
                 <input type="text" class="form-control" name="calle_colono" id="calle_colono" placeholder="Calle">
                 <br>
                 <input type="text" class="form-control" name="nocasa" id="nocasa" placeholder="Número de casa">
@@ -116,14 +118,12 @@
                                 var marca=$("#marca");
                                 var color=$("#color");
                                 var apellido=$("#apellido");
-                                    nombre.val(response.nombre);
-                                    marca.val(response.marca_auto);
-                                    color.val(response.color_auto);
-                                    apellido.val(response.apellido);
+                                nombre.val(response.nombre);
+                                marca.val(response.marca_auto);
+                                color.val(response.color_auto);
+                                apellido.val(response.apellido);
                             }
                         });
-
-                        //Poner otro ajax para consultar a la última persona que visitó algún hijo de perra y hacer método que contenga esa consulta
 
                         $.ajax({
                             url: "ultimovisitado",
@@ -132,9 +132,11 @@
                             dataType: 'json',
                             success: function (response) {
                                 var nombre=$("#nombre_colono");
+                                var apellido=$("#apellido_colono");
                                 var calle=$("#calle_colono");
                                 var nocasa=$("#nocasa");
                                 nombre.val(response[0].nombre);
+                                apellido.val(response[0].apellido);
                                 calle.val(response[0].calle);
                                 nocasa.val(response[0].nocasa);
                             }
@@ -147,6 +149,52 @@
                 // theme:"round"
             };
             $("#plca").easyAutocomplete(options);
+
+
+            var options2={
+
+                url:"colonos",
+
+                getValue: "nombre",
+
+                list: {
+                    showAnimation: {
+                        type: "fade", //normal|slide|fade
+                        time: 400,
+                        callback: function () {
+                        }
+                    },
+                    hideAnimation: {
+                        type: "slide", //normal|slide|fade
+                        time: 400,
+                        callback: function () {
+                        }
+                    },
+                    onChooseEvent: function () {
+                        var token = $("input[name=_token]").val();
+                        $.ajax({
+                            url: "colonosfiltrados",
+                            data: {nombre: $("input[name=nombre_colono]").val(), _token: token},
+                            type: "post",
+                            dataType: 'json',
+                            success: function (response) {
+                                var nombre=$("#nombre_colono");
+                                var apellido=$("#apellido_colono");
+                                var calle=$("#calle_colono");
+                                var nocasa=$("#nocasa");
+                                nombre.val(response[0].nombre);
+                                apellido.val(response[0].apellido);
+                                calle.val(response[0].calle);
+                                nocasa.val(response[0].no_casa);
+                            }
+                        });
+                    },
+                    match: {
+                        enabled: true
+                    }
+                },
+            };
+            $("#nombre_colono").easyAutocomplete(options2);
         });
     </script>
-    @endsection
+@endsection

@@ -43,7 +43,7 @@
                         <a class="dropdown-item" href={{url('visitas')}}>Visitas</a>
                         <a class="dropdown-item" href="#">Usuarios</a>
                     @endif
-                    <a class="nav-link btn btn-danger" href="#" style="color: #ffffff; font-size: 20px">Cerrar Sesión</a>
+                    <a class="nav-link btn btn-danger" href="/" style="color: #ffffff; font-size: 20px">Cerrar Sesión</a>
                 </div>
             </li>
         </ul>
