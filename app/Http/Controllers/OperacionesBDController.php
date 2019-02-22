@@ -58,7 +58,7 @@ function getplacasfiltradas(Request $request){
         return back();
     }
     function getcolonos(){
-        $colono=DB::table('colonos')->select(DB::raw("concat(nombre,' ',apellido) as 'nombre', concat(calle,' ',numero_casa) as 'direccion'"))->get();
+        $colono=DB::table('colonos')->select(DB::raw("nombre as 'nombre', concat(calle,' ',numero_casa) as 'direccion'"))->get();
 //        dd($colono);
         return view('registracolonos',compact('colono'));
     }
@@ -68,7 +68,7 @@ function getplacasfiltradas(Request $request){
 //        $apellido=$request->get('apellido_colono');
 //        $nombrecortado= explode(" ",$nombre);
         $colono=DB::table('colonos')
-            ->select(DB::raw("colonos.nombre as 'nombre', colonos.apellido as 'apellido', colonos.calle as 'calle', colonos.numero_casa as 'no_casa'"))
+            ->select(DB::raw("colonos.nombre as 'nombre', colonos.calle as 'calle', colonos.numero_casa as 'no_casa'"))
             ->where("colonos.nombre","=","$nombre")
             ->get();
 //        dd($colono);
@@ -77,7 +77,6 @@ function getplacasfiltradas(Request $request){
     function setcolonos(Request $request){
         $colono=new Colono();
         $colono->nombre=$request->input("nombre");
-        $colono->apellido=$request->input("apellido");
         $colono->calle=$request->input("calle");
         $colono->numero_casa=$request->input("ncasa");
         $colono->save();
@@ -87,7 +86,7 @@ function getplacasfiltradas(Request $request){
         $visita=DB::table('visitantes')
             ->join('visitas','visitas.id_visitante','=','visitantes.placa','inner')
             ->join('colonos','colonos.idcolono','=','visitas.id_colono','inner')
-            ->select(DB::raw("visitas.fecha_hora as 'fecha_hora', concat(colonos.nombre,' ',colonos.apellido) as 'nombre_colono', concat(visitantes.nombre,' ',visitantes.apellido) as 'nombre_visitante'"))
+            ->select(DB::raw("visitas.fecha_hora as 'fecha_hora', colonos.nombre as 'nombre_colono', concat(visitantes.nombre,' ',visitantes.apellido) as 'nombre_visitante'"))
             ->get();
 //        dd($visita);
         return view('visitas',compact('visita'));
@@ -115,7 +114,6 @@ function getplacasfiltradas(Request $request){
     }
     function setvisitas2($request){
         $nombredelcolono=$request->input('nombre_colono');
-        $apellidocolono=$request->input('apellido_colono');
         $numerocasa=$request->input('nocasa');
         $calle=$request->input('calle_colono');
         if ($request->input('nombre_colono')==null||$request->input('nombre_visitante')==null){
@@ -125,9 +123,8 @@ function getplacasfiltradas(Request $request){
         else
         {
             $nombrecolono=DB::table('colonos')
-                ->select(DB::raw("colonos.nombre as 'nombre', colonos.apellido as 'apellido', colonos.numero_casa as 'numero_casa', colonos.calle as 'calle', colonos.idcolono as 'idcolono'"))
+                ->select(DB::raw("colonos.nombre as 'nombre', colonos.numero_casa as 'numero_casa', colonos.calle as 'calle', colonos.idcolono as 'idcolono'"))
                 ->where("colonos.nombre","=", $nombredelcolono)
-                ->where("colonos.apellido","=", $apellidocolono)
                 ->where("colonos.numero_casa","=", $numerocasa)
                 ->where("colonos.calle","=", $calle)
                 ->first();
@@ -163,16 +160,16 @@ function getplacasfiltradas(Request $request){
             return back();
         }
     }
-    function ultimovisitado(Request $request){
-        $visitante=$request->get('placa');
-        $ultimo=DB::table('visitas')->join('colonos','colonos.idcolono','=','visitas.id_colono','inner')
-            ->join('visitantes','visitantes.placa','=','visitas.id_visitante')
-            ->select(DB::raw('colonos.nombre as "nombre",colonos.apellido as "apellido", colonos.calle as "calle", colonos.numero_casa as "nocasa"'))
-            ->where('visitas.id_visitante','=',$visitante)
-            ->orderBy('visitas.idvisita','desc')
-            ->limit(1)
-            ->get();
-//        dd($ultimo);
-        return $ultimo;
-    }
+//    function ultimovisitado(Request $request){
+//        $visitante=$request->get('placa');
+//        $ultimo=DB::table('visitas')->join('colonos','colonos.idcolono','=','visitas.id_colono','inner')
+//            ->join('visitantes','visitantes.placa','=','visitas.id_visitante')
+//            ->select(DB::raw('colonos.nombre as "nombre",colonos.apellido as "apellido", colonos.calle as "calle", colonos.numero_casa as "nocasa"'))
+//            ->where('visitas.id_visitante','=',$visitante)
+//            ->orderBy('visitas.idvisita','desc')
+//            ->limit(1)
+//            ->get();
+////        dd($ultimo);
+//        return $ultimo;
+//    }
 }

@@ -27,12 +27,12 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <div style="margin-left: 500px;">
+                <div style="margin-left: 410px;">
                     <h1>Control</h1>
                 </div>
             </li>
-            <li class="nav-item dropdown" style=" margin-left: 400px">
-                <a class="nav-link dropdown-toggle titulos" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #FFFFFF; font-size: 25px;">
+            <li class="nav-item dropdown" style=" margin-left: 450px">
+                <a class="nav-link dropdown-toggle titulos" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #FFFFFF; font-size: 35px;">
                     Menú
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">

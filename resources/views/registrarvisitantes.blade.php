@@ -3,7 +3,10 @@
 @endsection
 @section('Contenido')
     <div class="row">
-        <div class="col-md-6 offset-2">
+        <div class="col-md-6 offset-3">
+            <br><br>
+            <h1 style="color: #3d4852; text-align: center">Visitantes</h1>
+            <hr>
             <table class="table">
                 <thead>
                 <tr>
@@ -49,3 +52,5 @@
         {{--</div>--}}
     </div>
 @endsection
+@section('javascript')
+    @endsection

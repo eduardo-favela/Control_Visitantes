@@ -90,6 +90,10 @@ CHANGE COLUMN `apellido_p` `apellido` VARCHAR(45) NULL DEFAULT NULL ;
 ALTER TABLE `control`.`usuarios` 
 ADD COLUMN `tipo` INT NULL AFTER `pass`;
 
+ALTER TABLE `control`.`colonos` 
+DROP COLUMN `apellido`,
+CHANGE COLUMN `nombre` `nombre` VARCHAR(50) NULL DEFAULT NULL ;
+
 INSERT INTO `control`.`usuarios` (`idusuario`, `pass`, `tipo`) VALUES ('3554', '1010', '2');
 
 SET SQL_MODE=@OLD_SQL_MODE;

@@ -31,9 +31,9 @@
             <div class="col-md-3 espaciador">
                 <br>
 
-                <input type="text" class="form-control" name="placa" id="plca" placeholder="N° de Placa">
+                <input type="text" class="form-control" name="placa" id="plca" onkeyup="mayuscula(this)" placeholder="N° de Placa">
                 <br>
-                <input type="text" class="form-control" name="apellido_visitante" id="apellido" placeholder="Apellido del visitante">
+                <input type="text" class="form-control" onkeyup="mayuscula(this)" name="apellido_visitante" id="apellido" placeholder="Apellido del visitante">
                 <br>
                 <select name="marca_auto" id="marca" class="form-control">
                     <option value="0">Seleccionar automóvil:</option>
@@ -57,19 +57,18 @@
             </div>
             <div class="col-md-3 form-group">
                 <br>
-                <input type="text" class="form-control" name="nombre_visitante" id="nombre" placeholder="Nombre del visitante">
+                <input type="text" class="form-control" onkeyup="mayuscula(this)" name="nombre_visitante" id="nombre" placeholder="Nombre del visitante">
                 <br>
-                <input type="text" class="form-control" name="color_auto" id="color"  placeholder="Color de auto">
+                <input type="text" class="form-control" onkeyup="mayuscula(this)" name="color_auto"  id="color"  placeholder="Color de auto">
             </div>
             <div class="col-md-4 offset-1 form-group">
                 <br>
-                <input type="text" class="form-control" name="nombre_colono" id="nombre_colono" placeholder="Nombre del colono">
+                <input type="text" class="form-control" onkeyup="mayuscula(this)" name="nombre_colono" id="nombre_colono" placeholder="Nombre del colono">
                 <br>
-                <input type="text" class="form-control" name="apellido_colono" id="apellido_colono" placeholder="Apellido del colono">
+                {{--<input type="text" class="form-control" name="apellido_colono" id="apellido_colono" placeholder="Apellido del colono">--}}
+                <input type="text" class="form-control" name="calle_colono" onkeyup="mayuscula(this)" id="calle_colono" placeholder="Calle">
                 <br>
-                <input type="text" class="form-control" name="calle_colono" id="calle_colono" placeholder="Calle">
-                <br>
-                <input type="text" class="form-control" name="nocasa" id="nocasa" placeholder="Número de casa">
+                <input type="text" class="form-control" style="width: 150px" name="nocasa" id="nocasa" onkeyup="mayuscula(this)" placeholder="Número de casa">
                 <br>
                 {{--<h3>{{$ultimavisita}}</h3>--}}
             </div>
@@ -87,6 +86,11 @@
 @endsection
 @section('javascript')
     <script>
+        function mayuscula(campo){
+            $(campo).keyup(function() {
+                $(this).val($(this).val().toUpperCase());
+            });
+        }
         $(document).ready(function() {
             var options = {
                 url: "placas",
@@ -124,23 +128,22 @@
                                 apellido.val(response.apellido);
                             }
                         });
-
-                        $.ajax({
-                            url: "ultimovisitado",
-                            data: {placa: $("input[name=placa]").val(), _token: token},
-                            type: "post",
-                            dataType: 'json',
-                            success: function (response) {
-                                var nombre=$("#nombre_colono");
-                                var apellido=$("#apellido_colono");
-                                var calle=$("#calle_colono");
-                                var nocasa=$("#nocasa");
-                                nombre.val(response[0].nombre);
-                                apellido.val(response[0].apellido);
-                                calle.val(response[0].calle);
-                                nocasa.val(response[0].nocasa);
-                            }
-                        });
+                        // $.ajax({
+                        //     url: "ultimovisitado",
+                        //     data: {placa: $("input[name=placa]").val(), _token: token},
+                        //     type: "post",
+                        //     dataType: 'json',
+                        //     success: function (response) {
+                        //         var nombre=$("#nombre_colono");
+                        //         var apellido=$("#apellido_colono");
+                        //         var calle=$("#calle_colono");
+                        //         var nocasa=$("#nocasa");
+                        //         nombre.val(response[0].nombre);
+                        //         apellido.val(response[0].apellido);
+                        //         calle.val(response[0].calle);
+                        //         nocasa.val(response[0].nocasa);
+                        //     }
+                        // });
                     },
                     match: {
                         enabled: true
