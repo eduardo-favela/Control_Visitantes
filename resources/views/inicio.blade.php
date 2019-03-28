@@ -8,7 +8,17 @@
 @endsection
 @section('Contenido')
     <div class="row">
-        <div class="col-md-8 offset-md-2">
+
+        <div class="col-md-1">
+            <embed type="application/x-vlc-plugin" pluginspage="http://www.videolan.org"
+                   version="VideoLAN.VLCPlugin.2"
+                   width="640"
+                   height="480"
+                   id="vlc"
+                   />
+        </div>
+
+        <div class="col-md-8">
             <br>
             <h1 style="text-align:center; color: #3d4852;">Registrar visita</h1>
             <hr>
@@ -85,6 +95,15 @@
     </form>
 @endsection
 @section('javascript')
+
+
+    <script>
+        var vlc = document.getElementById("vlc");
+        vlc.playlist.add("rtsp://admin2:admin2@192.168.1.70:554/cam/realmonitor?channel=1&subtype=0");
+        vlc.playlist.play();
+    </script>
+
+
     <script>
         function mayuscula(campo){
             $(campo).keyup(function() {
@@ -145,6 +164,8 @@
                         //     }
                         // });
                     },
+
+
                     match: {
                         enabled: true
                     }
