@@ -19,36 +19,40 @@
     </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #22292f">
-    <a class="navbar-brand titulos" href="inicio" style="color: #ffffff; font-size: 35px ">Inicio</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <div style="margin-left: 410px;">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #22292f">
+            <div class="d-flex justify-content-between" style="width: 100%">
+                <a class="navbar-brand titulos" href="inicio" style="color: #ffffff; font-size: 35px ">Inicio</a>
+                <div>
                     <h1>Control</h1>
                 </div>
-            </li>
-            <li class="nav-item dropdown" style=" margin-left: 450px">
-                <a class="nav-link dropdown-toggle titulos" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #FFFFFF; font-size: 35px;">
-                    Menú
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    @if(Session::get('tipo')==1)
-
-                    <a class="dropdown-item" href={{url('registrarcolono')}}>Colonos</a>
-                    <a class="dropdown-item" href={{url('visitantes')}}>Visitantes</a>
-                        <a class="dropdown-item" href={{url('visitas')}}>Visitas</a>
-                        <a class="dropdown-item" href="#">Usuarios</a>
-                    @endif
-                    <a class="nav-link btn btn-danger" href="/" style="color: #ffffff; font-size: 20px">Cerrar Sesión</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse col-md-2" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        {{-- <li class="nav-item">
+                            <div style="margin-left: 410px;">
+                                <h1>Control</h1>
+                            </div>
+                        </li> --}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle titulos" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #FFFFFF; font-size: 35px;">
+                                Menú
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                {{-- @if(Session::get('tipo')==1) --}}
+                                <a class="dropdown-item" href={{url('registrarcolono')}}>Colonos</a>
+                                <a class="dropdown-item" href={{url('visitantes')}}>Visitantes</a>
+                                    <a class="dropdown-item" href={{url('visitas')}}>Visitas</a>
+                                    {{-- <a class="dropdown-item" href="#">Usuarios</a> --}}
+                                {{-- @endif --}}
+                                <a class="nav-link btn btn-danger" href="/" style="color: #ffffff; font-size: 20px">Cerrar Sesión</a>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-            </li>
-        </ul>
-    </div>
-</nav>
+            </div>
+        </nav>
 @section('Contenido')
 
 @show

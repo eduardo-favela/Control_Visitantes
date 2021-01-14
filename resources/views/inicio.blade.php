@@ -7,9 +7,9 @@
     </style>
 @endsection
 @section('Contenido')
-    <div class="row">
+    <div class="container">
 
-        <div class="col-md-1">
+        {{-- <div class="col-md-1">
             <embed type="application/x-vlc-plugin" pluginspage="http://www.videolan.org"
                    version="VideoLAN.VLCPlugin.2"
                    width="640"
@@ -22,8 +22,7 @@
             <br>
             <h1 style="text-align:center; color: #3d4852;">Registrar visita</h1>
             <hr>
-        </div>
-    </div>
+        </div> --}}
     <br><br>
     <div class="row">
         <div class="col-md-4 offset-1">
@@ -35,6 +34,8 @@
             <hr>
         </div>
     </div>
+</div>
+<div class="container">
     <form action="registrarvisitas" method="post">
         {{csrf_field()}}
         <div class="row">
@@ -93,6 +94,7 @@
             </div>
         </div>
     </form>
+</div>
 @endsection
 @section('javascript')
 
