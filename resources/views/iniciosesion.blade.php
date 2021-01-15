@@ -21,11 +21,13 @@
     }
 </style>
 <body>
+
 {{--<div class="row">--}}
 {{--<div class="col-md-12 col-sm-12">--}}
     <header class="titulo">Control de visitantes</header>
 {{--</div>
 </div>--}}
+<div class="container">
 <div class="row form-group" style="margin-top: 100px">
     <div class="col-md-4 col-sm-4 offset-4 form-control">
         <h2 class="iniciosesion" style="color: #3d4852;">Inicie sesión</h2>
@@ -47,6 +49,7 @@
         <br>
         </form>
     </div>
+</div>
 </div>
 <script src="{{url('/js/jquery-3.3.1.min.js')}}"></script>
 <script src="{{url('/js/Popper.js')}}"></script>
