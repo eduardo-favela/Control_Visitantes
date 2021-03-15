@@ -9,39 +9,30 @@
 @section('Contenido')
     <div class="container">
 
-        {{-- <div class="col-md-1">
+<!--         <div class="col-md-1">
             <embed type="application/x-vlc-plugin" pluginspage="http://www.videolan.org"
                    version="VideoLAN.VLCPlugin.2"
                    width="640"
                    height="480"
                    id="vlc"
                    />
+        </div> -->
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-8">
+                <br>
+                <h1 style="text-align:center; color: #3d4852;">Registrar visita</h1>
+                <hr>
+            </div>
         </div>
-
-        <div class="col-md-8">
-            <br>
-            <h1 style="text-align:center; color: #3d4852;">Registrar visita</h1>
-            <hr>
-        </div> --}}
-    <br><br>
-    <div class="row">
-        <div class="col-md-4 offset-1">
-            <h3 style="text-align:center; color: #3d4852;">Información del visitante</h3>
-            <hr>
-        </div>
-        <div class="col-md-4 offset-2">
-            <h3 style="text-align:center; color: #3d4852;">Información del colono</h3>
-            <hr>
-        </div>
-    </div>
-</div>
-<div class="container">
     <form action="registrarvisitas" method="post">
         {{csrf_field()}}
         <div class="row">
+            <div class="col-md-6">
+                <h3 style="text-align:center; color: #3d4852;">Información del visitante</h3>
+                <hr>
+            </div>
             <div class="col-md-3 espaciador">
                 <br>
-
                 <input type="text" class="form-control" name="placa" id="plca" onkeyup="mayuscula(this)" placeholder="N° de Placa">
                 <br>
                 <input type="text" class="form-control" onkeyup="mayuscula(this)" name="apellido_visitante" id="apellido" placeholder="Apellido del visitante">
@@ -73,6 +64,8 @@
                 <input type="text" class="form-control" onkeyup="mayuscula(this)" name="color_auto"  id="color"  placeholder="Color de auto">
             </div>
             <div class="col-md-4 offset-1 form-group">
+                <h3 style="text-align:center; color: #3d4852;">Información del colono</h3>
+                <hr>
                 <br>
                 <input type="text" class="form-control" onkeyup="mayuscula(this)" name="nombre_colono" id="nombre_colono" placeholder="Nombre del colono">
                 <br>
